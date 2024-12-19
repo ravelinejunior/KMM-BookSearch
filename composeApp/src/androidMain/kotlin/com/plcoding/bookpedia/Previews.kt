@@ -15,7 +15,7 @@ import com.plcoding.bookpedia.book.presentation.book_list.components.BookSearchB
 fun BookSearchBarPreview() {
     MaterialTheme {
         BookSearchBar(
-            searchQuery = "Marina",
+            searchQuery = "Book",
             onImeSearch = {},
             onSearchQueryChanged = {}
         )

@@ -21,6 +21,8 @@ import androidx.compose.material3.minimumInteractiveComponentSize
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalFocusManager
+import androidx.compose.ui.platform.SoftwareKeyboardController
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
@@ -38,6 +40,7 @@ fun BookSearchBar(
     searchQuery: String,
     onSearchQueryChanged: (String) -> Unit,
     onImeSearch: () -> Unit,
+    keyboardController: SoftwareKeyboardController?
 ) {
     CompositionLocalProvider(
         LocalTextSelectionColors provides TextSelectionColors(
@@ -45,6 +48,7 @@ fun BookSearchBar(
             backgroundColor = SandYellow,
         )
     ) {
+        val focusState = LocalFocusManager.current
         OutlinedTextField(
             value = searchQuery,
             onValueChange = onSearchQueryChanged,
@@ -87,7 +91,11 @@ fun BookSearchBar(
                     visible = searchQuery.isNotBlank()
                 ) {
                     IconButton(
-                        onClick = {},
+                        onClick = {
+                            onSearchQueryChanged("")
+                            keyboardController?.hide()
+                            focusState.clearFocus()
+                        },
                     ) {
                         Icon(
                             imageVector = Icons.Default.Close,

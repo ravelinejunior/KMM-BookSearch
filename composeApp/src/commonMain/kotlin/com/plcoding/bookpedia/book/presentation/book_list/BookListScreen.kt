@@ -62,6 +62,7 @@ fun BookListScreen(
             onSearchQueryChanged = { query ->
                 onAction(BookListAction.OnSearchQueryAction(query = query))
             },
+            keyboardController = keyboardController,
             onImeSearch = {
                 keyboardController?.hide()
             }

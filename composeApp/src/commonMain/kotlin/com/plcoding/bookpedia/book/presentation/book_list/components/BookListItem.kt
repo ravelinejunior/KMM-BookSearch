@@ -61,7 +61,9 @@ fun BookListItem(
             modifier = Modifier
                 .padding(16.dp)
                 .fillMaxWidth()
-                .height(IntrinsicSize.Min)
+                .height(IntrinsicSize.Min),
+            verticalAlignment = Alignment.CenterVertically,
+            horizontalArrangement = Arrangement.spacedBy(16.dp)
         ) {
             // Image
             Box(
@@ -165,6 +167,13 @@ fun BookListItem(
                         }
                     }
                 }
+                Text(
+                    text = book.firstPublishYear.toString(),
+                    style = MaterialTheme.typography.bodySmall,
+                    color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.66f),
+                    maxLines = 3,
+                    overflow = TextOverflow.Ellipsis
+                )
             }
             //Arrow go
             Image(

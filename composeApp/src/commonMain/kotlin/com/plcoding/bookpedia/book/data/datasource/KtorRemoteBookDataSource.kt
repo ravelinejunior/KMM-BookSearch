@@ -1,22 +1,32 @@
 package com.plcoding.bookpedia.book.data.datasource
 
-import com.plcoding.bookpedia.book.domain.model.Book
+import com.plcoding.bookpedia.book.data.dto.SearchResponseDto
 import com.plcoding.bookpedia.core.data.safeCall
 import com.plcoding.bookpedia.core.domain.DataError
 import com.plcoding.bookpedia.core.domain.Result
 import io.ktor.client.HttpClient
 import io.ktor.client.request.get
+import io.ktor.client.request.parameter
 
 private const val BASE_URL = "https://openlibrary.org"
-class KtorRemoteBookDataSource (
+
+class KtorRemoteBookDataSource(
     private val httpClient: HttpClient
-){
-    suspend fun searchBooks(
-        query:String,
-        resultLimit:Int?= null
-    ):Result<List<Book>,DataError.Remote>{
+) : RemoteBookDataSource {
+    override suspend fun searchBooks(
+        query: String,
+        resultLimit: Int?
+    ): Result<SearchResponseDto, DataError.Remote> {
         return safeCall {
-            httpClient.get("$BASE_URL/search.json?q=$query&limit=$resultLimit")
+            httpClient.get("$BASE_URL/search.json?q=$query&limit=$resultLimit") {
+                parameter("q", query)
+                parameter("limit", resultLimit)
+                parameter("language", "eng")
+                parameter(
+                    "fields",
+                    "key,title,author_name,author_key,cover_edition_key,cover_i,ratings_average,ratings_count,first_publish_year,language,number_of_pages_median,edition_count"
+                )
+            }
         }
     }
 }

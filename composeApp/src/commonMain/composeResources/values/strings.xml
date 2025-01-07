@@ -6,4 +6,27 @@
     <string name="favorites_saved">Favorites</string>
     <string name="empty_list">No Books Found, Try Again!</string>
     <string name="no_favorite_books">No Favorite Books Found Yet, Try Again!</string>
+    <string name="error_serialization">Error Serializing Book Data, Try Again!</string>
+    <string name="error_unknown">Unknown Error, Try Again!</string>
+    <string name="error_no_internet">No Internet Connection, Try Again!</string>
+    <string name="error_book_not_found">Book Not Found, Try Again!</string>
+    <string name="error_searching">Error Searching, Try Again!</string>
+    <string name="error_request_timeout">Request Timeout, Try Again!</string>
+    <string name="error_too_many_requests">Too Many Requests, Try Again!</string>
+    <string name="error_server_error">Internal Server Error, Try Again!</string>
+    <string name="error_unexpected">Unexpected Error, Try Again!</string>
+    <string name="error_unauthorized">Unauthorized, Try Again!</string>
+    <string name="error_forbidden">Forbidden, Try Again!</string>
+    <string name="error_not_found">Not Found, Try Again!</string>
+    <string name="error_method_not_allowed">Method Not Allowed, Try Again!</string>
+    <string name="error_conflict">Conflict, Try Again!</string>
+    <string name="error_unprocessable_entity">Unprocessable Entity, Try Again!</string>
+    <string name="error_internal_server_error">Internal Server Error, Try Again!</string>
+    <string name="error_service_unavailable">Service Unavailable, Try Again!</string>
+    <string name="error_gateway_timeout">Gateway Timeout, Try Again!</string>
+    <string name="error_gateway_error">Gateway Error, Try Again!</string>
+    <string name="error_gateway_unavailable">Gateway Unavailable, Try Again!</string>
+    <string name="error_disk_full">Disk Full, Try Again!</string>
+
+
 </resources>

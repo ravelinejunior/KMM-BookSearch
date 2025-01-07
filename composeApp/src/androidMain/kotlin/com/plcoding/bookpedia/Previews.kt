@@ -35,7 +35,7 @@ fun BookListItemPreview() {
     MaterialTheme {
         BookListItem(
             book = Book(
-                id = 1,
+                id = "1",
                 title = "Book Title",
                 authors = listOf("Author 1", "Author 2"),
                 imageUrl = "https://images.unsplash.com/photo-1622838320000-4b3b3b3b3b3b",

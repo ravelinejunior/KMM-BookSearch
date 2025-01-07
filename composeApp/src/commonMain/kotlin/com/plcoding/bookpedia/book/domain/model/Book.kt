@@ -1,13 +1,12 @@
 package com.plcoding.bookpedia.book.domain.model
 
-import io.ktor.http.HttpHeaders.Date
 import kotlin.random.Random
 
 data class Book(
-    val id: Int,
+    val id: String,
     val title: String,
     val imageUrl: String,
-    val description: String,
+    val description: String?,
     val authors: List<String>,
     val languages: List<String>,
     val firstPublishYear: String?,
@@ -27,7 +26,7 @@ data class Book(
 
             return List(100) { id ->
                 Book(
-                    id = id + 1,
+                    id = (id + 1).toString(),
                     title = titlesPool.random() + " (${Random.nextInt(1, 101)})",
                     imageUrl = "https://example.com/image_${id + 1}.jpg",
                     description = "Description of book ${id + 1}",

@@ -57,6 +57,7 @@ fun BookListItem(
             .clickable(onClick = onBookClick),
         color = LightBlue.copy(alpha = 0.2f)
     ) {
+        println("Image url: ${book.imageUrl}")
         Row(
             modifier = Modifier
                 .padding(16.dp)

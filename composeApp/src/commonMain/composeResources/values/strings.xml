@@ -6,6 +6,12 @@
     <string name="favorites_saved">Favorites</string>
     <string name="empty_list">No Books Found, Try Again!</string>
     <string name="no_favorite_books">No Favorite Books Found Yet, Try Again!</string>
+    <string name="rating_string">Rating</string>
+    <string name="pages_string">Pages</string>
+    <string name="book_cover">Book Cover</string>
+    <string name="languages_string">Languages</string>
+    <string name="synopsis_string">Synopsis</string>
+    <string name="description_not_available">Description not available</string>
     <string name="error_serialization">Error Serializing Book Data, Try Again!</string>
     <string name="error_unknown">Unknown Error, Try Again!</string>
     <string name="error_no_internet">No Internet Connection, Try Again!</string>

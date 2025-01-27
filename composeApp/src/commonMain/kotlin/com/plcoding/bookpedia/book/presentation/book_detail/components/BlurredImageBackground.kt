@@ -49,7 +49,6 @@ import cmp_bookpedia.composeapp.generated.resources.no_favorite_books
 import coil3.compose.rememberAsyncImagePainter
 import com.plcoding.bookpedia.core.presentation.DarkBlue
 import com.plcoding.bookpedia.core.presentation.DesertWhite
-import com.plcoding.bookpedia.core.presentation.SandYellow
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
 
@@ -101,8 +100,6 @@ fun BlurredImageBackground(
                             .blur(20.dp)
 
                     )
-                } else {
-                    CircularProgressIndicator()
                 }
             }
             Box(
@@ -145,7 +142,7 @@ fun BlurredImageBackground(
                 Spacer(modifier = Modifier.fillMaxHeight(0.15f))
                 ElevatedCard(
                     modifier = Modifier
-                        .width(200.dp)
+                        .height(260.dp)
                         .aspectRatio(2 / 3f),
                     shape = RoundedCornerShape(16.dp),
                     colors = CardDefaults.elevatedCardColors(

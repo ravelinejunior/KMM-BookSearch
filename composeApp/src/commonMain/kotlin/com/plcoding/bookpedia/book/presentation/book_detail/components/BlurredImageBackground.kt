@@ -22,7 +22,6 @@ import androidx.compose.material.icons.automirrored.twotone.ArrowBack
 import androidx.compose.material.icons.filled.Star
 import androidx.compose.material.icons.outlined.Star
 import androidx.compose.material3.CardDefaults
-import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.ElevatedCard
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
@@ -156,7 +155,61 @@ fun BlurredImageBackground(
                         targetState = imageLoadResult,
                     ) { result ->
                         when (result) {
-                            null -> CircularProgressIndicator()
+                            null -> {
+                                Box {
+                                    Image(
+                                        painter = painterResource(
+                                            Res.drawable.book_error_2
+                                        ),
+                                        contentDescription = stringResource(Res.string.book_cover),
+                                        modifier = Modifier
+                                            .fillMaxSize()
+                                            .background(color = Color.Transparent),
+                                        contentScale = ContentScale.Fit
+                                    )
+                                    IconButton(
+                                        onClick = onFavoriteClick,
+                                        modifier = Modifier
+                                            .height(40.dp)
+                                            .width(40.dp)
+                                            .background(
+                                                brush = Brush.radialGradient(
+                                                    colors = listOf(
+                                                        MaterialTheme.colorScheme.onSurface.copy(
+                                                            alpha = 0.8f
+                                                        ),
+                                                        MaterialTheme.colorScheme.surface.copy(alpha = 0.5f),
+                                                    ),
+                                                    radius = 100f
+                                                ),
+                                                shape = RoundedCornerShape(40.dp)
+                                            )
+                                            .align(Alignment.BottomEnd)
+                                            .padding(8.dp)
+                                    ) {
+                                        Icon(
+                                            imageVector = if (isFavorite) {
+                                                Icons.Filled.Star
+                                            } else {
+                                                Icons.Outlined.Star
+                                            },
+                                            contentDescription = if (isFavorite) {
+                                                stringResource(Res.string.favorites_saved)
+                                            } else {
+                                                stringResource(Res.string.no_favorite_books)
+                                            },
+                                            tint = if (isFavorite) {
+                                                Color.Yellow
+                                            } else {
+                                                MaterialTheme.colorScheme.surface
+                                            },
+                                        )
+                                    }
+
+                                }
+
+                            }
+
                             else -> {
                                 Box {
                                     Image(

@@ -11,6 +11,9 @@ actual class DatabaseFactory(
         val appContext = context.applicationContext
         val dbFile = appContext.getDatabasePath(FavoriteBookDatabase.DATABASE_NAME)
 
-        return Room.databaseBuilder(appContext, dbFile.absolutePath)
+        return Room.databaseBuilder<FavoriteBookDatabase>(appContext, dbFile.absolutePath)
+            .allowMainThreadQueries()
+            .fallbackToDestructiveMigration(false)
+            .fallbackToDestructiveMigrationOnDowngrade(false)
     }
 }

@@ -1,6 +1,8 @@
 package com.plcoding.bookpedia.book.presentation.book_detail.components
 
 import androidx.compose.animation.AnimatedContent
+import androidx.compose.animation.core.animateFloatAsState
+import androidx.compose.animation.core.tween
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
@@ -36,18 +38,22 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.blur
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import cmp_bookpedia.composeapp.generated.resources.Res
 import cmp_bookpedia.composeapp.generated.resources.book_cover
 import cmp_bookpedia.composeapp.generated.resources.book_error_2
 import cmp_bookpedia.composeapp.generated.resources.favorites_saved
 import cmp_bookpedia.composeapp.generated.resources.go_back
 import cmp_bookpedia.composeapp.generated.resources.no_favorite_books
+import coil3.compose.AsyncImagePainter
 import coil3.compose.rememberAsyncImagePainter
 import com.plcoding.bookpedia.core.presentation.DarkBlue
 import com.plcoding.bookpedia.core.presentation.DesertWhite
+import com.plcoding.bookpedia.core.presentation.SandYellow
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
 
@@ -155,7 +161,15 @@ fun BlurredImageBackground(
                         targetState = imageLoadResult,
                     ) { result ->
                         when (result) {
+
                             null -> {
+                                val painterState by mPainter.state.collectAsStateWithLifecycle()
+                                val transition by animateFloatAsState(
+                                    targetValue = if (painterState is AsyncImagePainter.State.Success)
+                                        1f
+                                    else 0f,
+                                    animationSpec = tween(durationMillis = 2000)
+                                )
                                 Box {
                                     Image(
                                         painter = painterResource(
@@ -164,7 +178,12 @@ fun BlurredImageBackground(
                                         contentDescription = stringResource(Res.string.book_cover),
                                         modifier = Modifier
                                             .fillMaxSize()
-                                            .background(color = Color.Transparent),
+                                            .background(color = Color.Transparent).graphicsLayer {
+                                                rotationX = (1f - transition) * 30f
+                                                val scale = 0.8f + (transition * 0.2f)
+                                                scaleX = scale
+                                                scaleY = scale
+                                            },
                                         contentScale = ContentScale.Fit
                                     )
                                     IconButton(
@@ -199,7 +218,7 @@ fun BlurredImageBackground(
                                                 stringResource(Res.string.no_favorite_books)
                                             },
                                             tint = if (isFavorite) {
-                                                Color.Yellow
+                                                SandYellow
                                             } else {
                                                 MaterialTheme.colorScheme.surface
                                             },
@@ -211,6 +230,13 @@ fun BlurredImageBackground(
                             }
 
                             else -> {
+                                val painterState by mPainter.state.collectAsStateWithLifecycle()
+                                val transition by animateFloatAsState(
+                                    targetValue = if (painterState is AsyncImagePainter.State.Success)
+                                        1f
+                                    else 0f,
+                                    animationSpec = tween(durationMillis = 2000)
+                                )
                                 Box {
                                     Image(
                                         painter = if (result.isSuccess) mPainter else painterResource(
@@ -219,7 +245,12 @@ fun BlurredImageBackground(
                                         contentDescription = stringResource(Res.string.book_cover),
                                         modifier = Modifier
                                             .fillMaxSize()
-                                            .background(color = Color.Transparent),
+                                            .background(color = Color.Transparent).graphicsLayer {
+                                                rotationX = (1f - transition) * 30f
+                                                val scale = 0.8f + (transition * 0.2f)
+                                                scaleX = scale
+                                                scaleY = scale
+                                            },
                                         contentScale = if (result.isSuccess) {
                                             ContentScale.Crop
                                         } else {
@@ -257,7 +288,11 @@ fun BlurredImageBackground(
                                             } else {
                                                 stringResource(Res.string.no_favorite_books)
                                             },
-                                            tint = Color.Yellow,
+                                            tint = if (isFavorite) {
+                                                SandYellow
+                                            } else {
+                                                MaterialTheme.colorScheme.surface
+                                            },
                                         )
                                     }
 
